@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:smart_kitchen/helper/constants.dart';
 
-class CategoryFilters extends StatefulWidget {
-  const CategoryFilters({super.key});
+class CategoryFilters extends StatelessWidget {
+  final String selectedCategory;
+  final ValueChanged<String> onCategoryChanged;
 
-  @override
-  State<CategoryFilters> createState() => _CategoryFiltersState();
-}
+  const CategoryFilters({
+    super.key,
+    required this.selectedCategory,
+    required this.onCategoryChanged,
+  });
 
-class _CategoryFiltersState extends State<CategoryFilters> {
-  String _selectedCategory = 'ALL';
-  final List<String> _categories = ['ALL', 'DAIRY', 'PRODUCE', 'MEAT'];
+  final List<String> _categories = const ['ALL', 'DAIRY', 'PRODUCE', 'MEAT'];
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +19,12 @@ class _CategoryFiltersState extends State<CategoryFilters> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: _categories.map((category) {
-          final isSelected = _selectedCategory == category;
+          final isSelected = selectedCategory == category;
           return Padding(
             padding: const EdgeInsets.only(right: 10),
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                  _selectedCategory = category;
-                });
+                onCategoryChanged(category);
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),

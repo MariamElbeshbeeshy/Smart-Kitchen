@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/widgets/pantry_card.dart';
 import 'package:smart_kitchen/models/pantry_item_model.dart';
 

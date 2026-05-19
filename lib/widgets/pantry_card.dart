@@ -30,7 +30,7 @@ class PantryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(40),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -50,7 +50,7 @@ class PantryCard extends StatelessWidget {
                 ),
                 Text(
                   status,
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: statusColor.withOpacity(0.7)),
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: statusColor.withValues(alpha: 0.7)),
                 ),
               ],
             ),
