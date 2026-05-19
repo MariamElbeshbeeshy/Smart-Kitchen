@@ -14,9 +14,9 @@ class _NavigationViewState extends State<NavigationView> {
   int _selectedIndex = 2;
 
   final List<Widget> _pages = [
-    Center(child: Text("welcome in Home")),
     PantryInventoryScreen(),
     Center(child: Text("welcome in AI Cook")),
+    Center(child: Text("welcome in Home")),
     Center(child: Text("welcome in Cart")),
     Center(child: Text("welcome in Profile")),
   ];
@@ -59,10 +59,6 @@ class _NavigationViewState extends State<NavigationView> {
             unselectedLabelStyle: const TextStyle(fontSize: 12),
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled),
-                label: "Home",
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.inventory_2_outlined),
                 label: "Inventory",
               ),
@@ -70,6 +66,10 @@ class _NavigationViewState extends State<NavigationView> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.smart_toy_outlined),
                 label: "AI Cook",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled),
+                label: "Home",
               ),
 
               BottomNavigationBarItem(
