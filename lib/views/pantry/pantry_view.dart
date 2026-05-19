@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_kitchen/helper/constants.dart';
+import 'package:smart_kitchen/models/pantry_item_model.dart';
 import 'package:smart_kitchen/widgets/category_filters.dart';
 import 'package:smart_kitchen/widgets/custom_appbar.dart';
 import 'package:smart_kitchen/widgets/pantry_header.dart';
@@ -11,6 +12,29 @@ class PantryInventoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<PantryItemModel> dummyPantryItems = [
+  PantryItemModel(
+    name: 'Whole Milk',
+    image: 'assets/images/milk.png',
+    category: 'DAIRY',
+    quantity: 1,
+    expiryDate: DateTime.now().subtract(const Duration(days: 2)), // منتهي منذ يومين
+  ),
+  PantryItemModel(
+    name: 'Strawberries',
+    image: 'assets/images/strawberries.png',
+    category: 'PRODUCE',
+    quantity: 1,
+    expiryDate: DateTime.now().add(const Duration(days: 1)), // ينتهي غداً
+  ),
+  PantryItemModel(
+    name: 'Asparagus',
+    image: 'assets/images/asparagus.png',
+    category: 'PRODUCE',
+    quantity: 1,
+    expiryDate: DateTime.now().add(const Duration(days: 5)), // طازج
+  ),
+];
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: const PantryAppBar(),
@@ -19,7 +43,7 @@ class PantryInventoryScreen extends StatelessWidget {
         backgroundColor: kPrimaryColor,
         child: const Icon(Icons.add, color: Colors.white, size: 30),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +55,7 @@ class PantryInventoryScreen extends StatelessWidget {
             SizedBox(height: 25),
             CategoryFilters(),
             SizedBox(height: 30),
-            PantryList(),
+            PantryList(items: dummyPantryItems,),
           ],
         ),
       ),

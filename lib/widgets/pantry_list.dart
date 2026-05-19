@@ -1,39 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/widgets/pantry_card.dart';
+import 'package:smart_kitchen/models/pantry_item_model.dart';
 
 class PantryList extends StatelessWidget {
-  const PantryList({super.key});
+  final List<PantryItemModel> items;
+  const PantryList({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        PantryCard(
-          name: 'Whole Milk',
-          status: 'EXPIRED',
-          timeInfo: '2 DAYS AGO',
-          image: 'assets/images/milk.png',
-          cardColor: Color(0xFFFFEBEE),
-          statusColor: Colors.red,
-          showWarning: true,
-        ),
-        PantryCard(
-          name: 'Strawberries',
-          status: 'EXPIRING SOON',
-          timeInfo: '1 DAY',
-          image: 'assets/images/strawberries.png',
-          statusColor: Colors.purple,
-        ),
-        PantryCard(
-          name: 'Asparagus',
-          status: 'FRESH',
-          timeInfo: '5 DAYS',
-          image: 'assets/images/asparagus.png',
-          statusColor: kPrimaryColor,
-        ),
-      ],
+    return ListView.builder(
+      shrinkWrap: true,
+      physics:
+          const NeverScrollableScrollPhysics(), 
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
+
+        return PantryCard(
+          name: item.name,
+          status: item.statusText,
+          timeInfo: item.timeInfoText,
+          image: item.image,
+          statusColor: item.statusColor,
+          cardColor: item.cardColor,
+          showWarning: item.showWarning,
+        );
+      },
     );
   }
 }
-
