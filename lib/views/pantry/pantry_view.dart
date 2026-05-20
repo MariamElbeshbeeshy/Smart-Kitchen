@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_kitchen/cubits/pantry_cubit/pantry_cubit.dart';
 import 'package:smart_kitchen/helper/constants.dart';
+import 'package:smart_kitchen/views/pantry/add_item_view.dart';
 import 'package:smart_kitchen/widgets/category_filters.dart';
 import 'package:smart_kitchen/widgets/custom_appbar.dart';
 import 'package:smart_kitchen/widgets/pantry_header.dart';
@@ -10,6 +11,7 @@ import 'package:smart_kitchen/widgets/pantry_search_bar.dart';
 
 class PantryInventoryScreen extends StatelessWidget {
   const PantryInventoryScreen({super.key});
+  static String id = "Pantry View";
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,9 @@ class PantryInventoryScreen extends StatelessWidget {
         backgroundColor: kBackgroundColor,
         appBar: const PantryAppBar(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AddItemView.id );
+          },
           backgroundColor: kPrimaryColor,
           child: const Icon(Icons.add, color: Colors.white, size: 30),
         ),
@@ -37,11 +41,13 @@ class PantryInventoryScreen extends StatelessWidget {
                     PantrySearchBar(),
                     SizedBox(height: 25),
                     CategoryFilters(
-                    selectedCategory: state.selectedCategory,
-                    onCategoryChanged: (category) {
-                      context.read<PantryCubit>().updateFilter(category: category);
-                    },
-                  ),
+                      selectedCategory: state.selectedCategory,
+                      onCategoryChanged: (category) {
+                        context.read<PantryCubit>().updateFilter(
+                          category: category,
+                        );
+                      },
+                    ),
                     SizedBox(height: 30),
                     PantryList(items: state.filteredItems),
                   ],
