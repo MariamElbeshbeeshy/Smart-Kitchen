@@ -31,22 +31,34 @@ class PantryCubit extends Cubit<PantryState> {
     ),
   ];
 
+  String _currentCategory = 'ALL';
+  String _currentQuery = '';
+
   void loadPantryItems() {
-    emit(PantryLoadedState(filteredItems: _allItems, selectedCategory: 'ALL'));
+    emit(
+      PantryLoadedState(
+        filteredItems: _allItems,
+        selectedCategory: 'ALL',
+        searchQuery: '',
+      ),
+    );
   }
 
-  void filterByCategory(String category) {
-    if (category == 'ALL') {
-      emit(
-        PantryLoadedState(filteredItems: _allItems, selectedCategory: 'ALL'),
-      );
-    } else {
-      final filtered = _allItems
-          .where((item) => item.category == category)
-          .toList();
-      emit(
-        PantryLoadedState(filteredItems: filtered, selectedCategory: category),
-      );
-    }
+  void updateFilter({String? category, String? query}) {
+    if (category != null) _currentCategory = category;
+    if (query != null) _currentQuery = query.trim().toLowerCase();
+
+    List<PantryItemModel> result = _allItems.where((item) {
+      final matchesCategory = _currentCategory == 'ALL' || item.category == _currentCategory;
+      final matchesSearch = item.name.toLowerCase().contains(_currentQuery);
+      
+      return matchesCategory && matchesSearch;
+    }).toList();
+
+    emit(PantryLoadedState(
+      filteredItems: result,
+      selectedCategory: _currentCategory,
+      searchQuery: _currentQuery,
+    ));
   }
 }

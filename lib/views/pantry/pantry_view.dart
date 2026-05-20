@@ -39,7 +39,7 @@ class PantryInventoryScreen extends StatelessWidget {
                     CategoryFilters(
                     selectedCategory: state.selectedCategory,
                     onCategoryChanged: (category) {
-                      context.read<PantryCubit>().filterByCategory(category);
+                      context.read<PantryCubit>().updateFilter(category: category);
                     },
                   ),
                     SizedBox(height: 30),
