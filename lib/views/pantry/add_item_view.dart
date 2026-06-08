@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_kitchen/cubits/pantry_cubit/pantry_cubit.dart';
 import 'package:smart_kitchen/helper/constants.dart';
+import 'package:smart_kitchen/models/pantry_item_model.dart';
 import 'package:smart_kitchen/widgets/category_dropdown.dart';
+import 'package:smart_kitchen/widgets/custom_appbar.dart';
 import 'package:smart_kitchen/widgets/custom_text_field.dart';
 import 'package:smart_kitchen/widgets/expiry_date_picker.dart';
 import 'package:smart_kitchen/widgets/quantity_counter.dart';
@@ -31,6 +35,13 @@ class _AddItemViewState extends State<AddItemView> {
 
   void _submitData() {
     if (_formKey.currentState!.validate()) {
+      final newItem = PantryItemModel(
+        name: _nameController.text,
+        category: _selectedCategory,
+        expiryDate: _selectedDate,
+        quantity: _quantity,
+      );
+      context.read<PantryCubit>().addPantryItem(newItem);
       Navigator.pop(context);
     }
   }
@@ -39,31 +50,32 @@ class _AddItemViewState extends State<AddItemView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          'Add to Pantry',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-          ),
-        ),
-        centerTitle: false,
-      ),
+      appBar: PantryAppBar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
+              Text(
+                'Add to Pantry',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+              Text(
+                'Log your ingredients to keep track of what you have and when it expires.',
+                style: TextStyle(
+                  color: const Color.fromARGB(255, 106, 106, 106),
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 20),
               CustomTextField(
                 label: 'Product Name',
                 hint: 'e.g., Whole Milk',

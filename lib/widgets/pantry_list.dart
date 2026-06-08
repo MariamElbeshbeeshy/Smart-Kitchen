@@ -20,7 +20,7 @@ class PantryList extends StatelessWidget {
           name: item.name,
           status: item.statusText,
           timeInfo: item.timeInfoText,
-          image: item.image,
+          image: item.productImage ,
           statusColor: item.statusColor,
           cardColor: item.cardColor,
           showWarning: item.showWarning,

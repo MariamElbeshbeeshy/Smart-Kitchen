@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:smart_kitchen/cubits/pantry_cubit/pantry_cubit.dart';
 import 'package:smart_kitchen/helper/constants.dart';
+import 'package:smart_kitchen/models/pantry_item_model.dart';
 import 'package:smart_kitchen/views/navigation_view.dart';
 import 'package:smart_kitchen/views/pantry/add_item_view.dart';
 import 'package:smart_kitchen/views/pantry/pantry_view.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(PantryItemModelAdapter());
+  await Hive.openBox<PantryItemModel>('pantry_box');
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => PantryCubit()..loadPantryItems()),
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {

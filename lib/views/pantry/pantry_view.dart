@@ -15,47 +15,44 @@ class PantryInventoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PantryCubit()..loadPantryItems(),
-      child: Scaffold(
-        backgroundColor: kBackgroundColor,
-        appBar: const PantryAppBar(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, AddItemView.id );
+    return Scaffold(
+      backgroundColor: kBackgroundColor,
+      appBar: const PantryAppBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, AddItemView.id );
+        },
+        backgroundColor: kPrimaryColor,
+        child: const Icon(Icons.add, color: Colors.white, size: 30),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: BlocBuilder<PantryCubit, PantryState>(
+          builder: (context, state) {
+            if (state is PantryLoadedState) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20),
+                  PantryHeader(itemCount: 12),
+                  SizedBox(height: 25),
+                  PantrySearchBar(),
+                  SizedBox(height: 25),
+                  CategoryFilters(
+                    selectedCategory: state.selectedCategory,
+                    onCategoryChanged: (category) {
+                      context.read<PantryCubit>().updateFilter(
+                        category: category,
+                      );
+                    },
+                  ),
+                  SizedBox(height: 30),
+                  PantryList(items: state.filteredItems),
+                ],
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
           },
-          backgroundColor: kPrimaryColor,
-          child: const Icon(Icons.add, color: Colors.white, size: 30),
-        ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: BlocBuilder<PantryCubit, PantryState>(
-            builder: (context, state) {
-              if (state is PantryLoadedState) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 20),
-                    PantryHeader(itemCount: 12),
-                    SizedBox(height: 25),
-                    PantrySearchBar(),
-                    SizedBox(height: 25),
-                    CategoryFilters(
-                      selectedCategory: state.selectedCategory,
-                      onCategoryChanged: (category) {
-                        context.read<PantryCubit>().updateFilter(
-                          category: category,
-                        );
-                      },
-                    ),
-                    SizedBox(height: 30),
-                    PantryList(items: state.filteredItems),
-                  ],
-                );
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
-          ),
         ),
       ),
     );
