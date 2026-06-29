@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "456910880549",
+    "project_id": "smart-kitchen-4ab79",
+    "storage_bucket": "smart-kitchen-4ab79.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456910880549:android:42a1f692edd16802eaa4cc",
+        "android_client_info": {
+          "package_name": "com.example.smart_kitchen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpMg_9WzYsA3vXre-Xa5XtaElAr20NSXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
