@@ -38,9 +38,6 @@ class _MarketplaceViewState extends State<MarketplaceView> {
       body: SafeArea(
         child: Column(
           children: [
-      
-
-      
             Expanded(
               child: BlocBuilder<MarketplaceCubit, MarketplaceState>(
                 builder: (context, state) {

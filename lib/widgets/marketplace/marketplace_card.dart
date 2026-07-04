@@ -41,7 +41,6 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             /// IMAGE
             Expanded(
               flex: 55,
@@ -115,10 +114,9 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Text(
                       widget.product.name,
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
@@ -132,8 +130,11 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
 
                     Row(
                       children: [
-                        const Icon(Icons.star_rounded,
-                            color: Colors.amber, size:14),
+                        const Icon(
+                          Icons.star_rounded,
+                          color: Colors.amber,
+                          size: 14,
+                        ),
                         const SizedBox(width: 3),
                         Text(
                           widget.product.rating.toStringAsFixed(1),
@@ -151,7 +152,6 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-
                         Expanded(
                           child: Text(
                             "\$${widget.product.price}",
