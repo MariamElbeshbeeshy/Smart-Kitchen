@@ -17,13 +17,7 @@ class PantryList extends StatelessWidget {
         final item = items[index];
 
         return PantryCard(
-          name: item.name,
-          status: item.statusText,
-          timeInfo: item.timeInfoText,
-          image: item.productImage ,
-          statusColor: item.statusColor,
-          cardColor: item.cardColor,
-          showWarning: item.showWarning,
+          item: items[index],
         );
       },
     );
