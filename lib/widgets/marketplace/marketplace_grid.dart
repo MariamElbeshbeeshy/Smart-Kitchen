@@ -5,13 +5,13 @@ import 'package:smart_kitchen/widgets/marketplace/marketplace_card.dart';
 class MarketplaceGrid extends StatelessWidget {
   final List<MarketplaceProduct> products;
   final Function(MarketplaceProduct) onProductTap;
-  final Function(MarketplaceProduct) onAddToCart; // ← جديد
+  final Function(MarketplaceProduct) onAddToCart; 
 
   const MarketplaceGrid({
     super.key,
     required this.products,
     required this.onProductTap,
-    required this.onAddToCart, // ← جديد
+    required this.onAddToCart, 
   });
 
   @override
@@ -44,7 +44,7 @@ class MarketplaceGrid extends StatelessWidget {
         return MarketplaceCard(
           product: product,
           onTap: () => onProductTap(product),
-          onAddToCart: () => onAddToCart(product), // ← جديد
+          onAddToCart: () => onAddToCart(product), 
         );
       },
     );

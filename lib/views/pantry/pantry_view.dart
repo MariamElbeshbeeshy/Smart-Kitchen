@@ -28,7 +28,7 @@ class PantryInventoryScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: BlocBuilder<PantryCubit, PantryState>(
-          builder: (context, state) {
+          builder: (contex, state) {
             if (state is PantryLoadedState) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

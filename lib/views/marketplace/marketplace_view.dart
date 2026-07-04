@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_kitchen/cubits/marketplace_cubit/marketplace_cubit.dart';
 import 'package:smart_kitchen/cubits/marketplace_cubit/marketplace_states.dart';
+import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/widgets/marketplace/marketplace_header.dart';
 import 'package:smart_kitchen/widgets/marketplace/marketplace_search_bar.dart';
 import 'package:smart_kitchen/widgets/marketplace/marketplace_filters.dart';
 import 'package:smart_kitchen/widgets/marketplace/marketplace_grid.dart';
 import 'package:smart_kitchen/views/marketplace/product_details_view.dart';
+import 'package:smart_kitchen/views/marketplace/add_product_view.dart';
 
 class MarketplaceView extends StatefulWidget {
   const MarketplaceView({super.key});
@@ -35,12 +37,26 @@ class _MarketplaceViewState extends State<MarketplaceView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF8F8F8),
+
+      
+   floatingActionButton: FloatingActionButton(
+  backgroundColor: kPrimaryColor,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20),
+  ),
+  onPressed: () async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const AddProductView()),
+    );
+    context.read<MarketplaceCubit>().loadProducts();
+  },
+  child: const Icon(Icons.add, color: Colors.white, size: 28),
+),
+
       body: SafeArea(
         child: Column(
           children: [
-      
-
-      
             Expanded(
               child: BlocBuilder<MarketplaceCubit, MarketplaceState>(
                 builder: (context, state) {
@@ -67,9 +83,7 @@ class _MarketplaceViewState extends State<MarketplaceView> {
                           MarketplaceSearchBar(
                             controller: searchController,
                             onChanged: (value) {
-                              context.read<MarketplaceCubit>().searchProducts(
-                                value,
-                              );
+                              context.read<MarketplaceCubit>().searchProducts(value);
                             },
                           ),
 
@@ -85,9 +99,7 @@ class _MarketplaceViewState extends State<MarketplaceView> {
                             ],
                             selectedCategory: state.selectedCategory,
                             onCategorySelected: (category) {
-                              context.read<MarketplaceCubit>().filterProducts(
-                                category,
-                              );
+                              context.read<MarketplaceCubit>().filterProducts(category);
                             },
                           ),
 
@@ -99,8 +111,7 @@ class _MarketplaceViewState extends State<MarketplaceView> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) =>
-                                      ProductDetailsView(product: product),
+                                  builder: (_) => ProductDetailsView(product: product),
                                 ),
                               );
                             },
