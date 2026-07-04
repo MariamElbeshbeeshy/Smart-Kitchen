@@ -22,9 +22,18 @@ class PantryCubit extends Cubit<PantryState> {
   }
 
   void updateFilter({String? category, String? query}) {
-    if (category != null) _currentCategory = category;
-    if (query != null) _currentQuery = query.trim().toLowerCase();
-    _applyFilter();
+    if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
+
+    if (category != null) {
+      _currentCategory = category;
+      _applyFilter();
+    }
+    if (query != null) {
+      _debounceTimer = Timer(const Duration(milliseconds: 800), () async {
+        _currentQuery = query.trim().toLowerCase();
+        _applyFilter();
+      });
+    }
   }
 
   void _applyFilter() {
