@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/views/pantry/pantry_view.dart';
+import 'package:smart_kitchen/views/marketplace/marketplace_view.dart';
 
 class NavigationView extends StatefulWidget {
   const NavigationView({super.key});
@@ -16,7 +17,7 @@ class _NavigationViewState extends State<NavigationView> {
   final List<Widget> _pages = [
     PantryInventoryScreen(),
     Center(child: Text("welcome in AI Cook")),
-    Center(child: Text("welcome in Home")),
+    MarketplaceView(),
     Center(child: Text("welcome in Cart")),
     Center(child: Text("welcome in Profile")),
   ];

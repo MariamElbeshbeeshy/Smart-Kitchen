@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-
 part 'pantry_item_model.g.dart';
 
 enum PantryStatus { expired, expiringSoon, fresh }

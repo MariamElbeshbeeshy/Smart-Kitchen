@@ -8,9 +8,13 @@ import 'package:smart_kitchen/models/pantry_item_model.dart';
 import 'package:smart_kitchen/views/navigation_view.dart';
 import 'package:smart_kitchen/views/pantry/add_item_view.dart';
 import 'package:smart_kitchen/views/pantry/pantry_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:smart_kitchen/firebase_options.dart';
+import 'package:smart_kitchen/cubits/marketplace_cubit/marketplace_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
   Hive.registerAdapter(PantryItemModelAdapter());
   await Hive.openBox<PantryItemModel>('pantry_box');
@@ -18,6 +22,8 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => PantryCubit()..loadPantryItems()),
+
+        BlocProvider(create: (context) => MarketplaceCubit()),
       ],
       child: const MainApp(),
     ),
