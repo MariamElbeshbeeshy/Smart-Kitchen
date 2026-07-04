@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "719601960728",
+    "project_id": "smart-kitchen-8c465",
+    "storage_bucket": "smart-kitchen-8c465.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719601960728:android:11ffda1ec2b9fed69c406d",
+        "android_client_info": {
+          "package_name": "com.example.smart_kitchen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "719601960728-1f0ipabr06ncp2mar0ckrg8miub4qs8b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smart_kitchen",
+            "certificate_hash": "05d8cc0124e554f329e728c0dd22e6a9fdd227aa"
+          }
+        },
+        {
+          "client_id": "719601960728-dsnltq1qqinpudegjovildvkpfudvarr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPEfWuL3wVMH_TrsEJvAtgP8-qIgwTjzg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719601960728-dsnltq1qqinpudegjovildvkpfudvarr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "719601960728-j9ubb0fq2dn304jrtnu72uf32l1kbct0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartKitchen"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
