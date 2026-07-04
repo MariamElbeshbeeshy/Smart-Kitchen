@@ -7,6 +7,7 @@ import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/models/pantry_item_model.dart';
 import 'package:smart_kitchen/views/navigation_view.dart';
 import 'package:smart_kitchen/views/pantry/add_item_view.dart';
+import 'package:smart_kitchen/views/pantry/pantry_item_details_view.dart';
 import 'package:smart_kitchen/views/pantry/pantry_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:smart_kitchen/firebase_options.dart';
@@ -22,7 +23,6 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => PantryCubit()..loadPantryItems()),
-
         BlocProvider(create: (context) => MarketplaceCubit()),
       ],
       child: const MainApp(),
