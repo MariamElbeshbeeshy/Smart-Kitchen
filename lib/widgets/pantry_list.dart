@@ -14,8 +14,6 @@ class PantryList extends StatelessWidget {
           const NeverScrollableScrollPhysics(), 
       itemCount: items.length,
       itemBuilder: (context, index) {
-        final item = items[index];
-
         return PantryCard(
           item: items[index],
         );

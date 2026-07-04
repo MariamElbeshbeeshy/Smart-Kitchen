@@ -8,31 +8,9 @@ class PantryHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Pantry Inventory',
-          style: TextStyle(fontSize: 36, fontWeight: FontWeight.w700),
-        ),
-        const SizedBox(height: 8),
-        RichText(
-          text: TextSpan(
-            style: const TextStyle(color: Colors.grey, fontSize: 16),
-            children: [
-              const TextSpan(text: 'You have '),
-              TextSpan(
-                text: '$itemCount items',
-                style: const TextStyle(
-                  color: kPrimaryColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const TextSpan(text: ' needing attention.'),
-            ],
-          ),
-        ),
-      ],
+    return const Text(
+      'Pantry Inventory',
+      style: TextStyle(fontSize: 36, fontWeight: FontWeight.w700),
     );
   }
 }

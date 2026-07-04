@@ -52,7 +52,7 @@ class PantryCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    item.status.toString(),
+                    item.statusText,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
