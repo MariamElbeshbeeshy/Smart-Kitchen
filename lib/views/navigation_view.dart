@@ -60,16 +60,16 @@ class _NavigationViewState extends State<NavigationView> {
             unselectedLabelStyle: const TextStyle(fontSize: 12),
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.inventory_2_outlined),
-                label: "Inventory",
+                icon: Icon(Icons.store),
+                label: "Marketplace",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.smart_toy_outlined),
                 label: "AI Cook",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled),
-                label: "Home",
+                icon: Icon(Icons.inventory_2_outlined),
+                label: "Inventory",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart_outlined),

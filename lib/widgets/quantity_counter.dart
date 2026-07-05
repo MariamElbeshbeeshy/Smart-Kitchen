@@ -13,82 +13,77 @@ class QuantityCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Quantity',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 12,
+      ),
+      decoration: BoxDecoration(
+        color: const Color(0xffF8F8F8),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          const Text(
+            "Quantity",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          width: 160, // تحديد عرض مناسب متناسق مع الصورة
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.grey[300], // خلفية الرمادي الفاتح
-            borderRadius: BorderRadius.circular(12),
+          Spacer(),
+          GestureDetector(
+            onTap: value > 1 ? () => onChanged(value - 1) : null,
+            child: Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: .06),
+                    blurRadius: 6,
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.remove, size: 18),
+            ),
           ),
-          child: Row(
-            children: [
-              // زر النقصان (-)
-              Expanded(
-                child: InkWell(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    bottomLeft: Radius.circular(12),
-                  ),
-                  onTap: value > 1
-                      ? () => onChanged(value - 1)
-                      : null, // يمنع النزول عن 1
-                  child: const Center(
-                    child: Icon(Icons.remove, color: Colors.black87, size: 20),
-                  ),
-                ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              "$value",
+              style: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
               ),
-
-              // رقم العداد (1)
-              Expanded(
-                child: Center(
-                  child: Text(
-                    '$value',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ),
-              ),
-
-              // زر الزيادة (+) الملون بلون الهوية الأخضر
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(
-                    4.0,
-                  ), // مسافة بسيطة ليعطي شكل مربع منفصل داخل الحاوية
-                  child: InkWell(
-                    onTap: () => onChanged(value + 1),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color:
-                            kPrimaryColor, // اللون الأخضر الخاص بكم #097622 أو #4caf50
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Center(
-                        child: Icon(Icons.add, color: Colors.white, size: 20),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ],
+          GestureDetector(
+            onTap: () => onChanged(value + 1),
+            child: Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: kPrimaryColor,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: .06),
+                    blurRadius: 6,
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.add,
+                size: 18,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

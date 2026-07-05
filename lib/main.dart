@@ -60,8 +60,8 @@ class MainApp extends StatelessWidget {
         PantryInventoryScreen.id: (context) => PantryInventoryScreen(),
         AddItemView.id: (context) => AddItemView(),
       },
-      //initialRoute: NavigationView.id,
-      home: OnboardingScreen(),
+      initialRoute: NavigationView.id,
+      // home: OnboardingScreen(),
     );
   }
 }
