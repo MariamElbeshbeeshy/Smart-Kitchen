@@ -28,8 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final response = await http.post(
         Uri.parse('https://api.groq.com/openai/v1/chat/completions'),
         headers: {
-          'Authorization':
-              'Bearer $myApiKey',
+          'Authorization': 'Bearer $myApiKey',
           'Content-Type': 'application/json',
         },
         body: jsonEncode({
@@ -181,7 +180,7 @@ Return exactly this JSON format:
               /// HERO IMAGE
               Column(
                 children: [
-                  Image.asset("assets/images/logo.jpg", height: 70),
+                  Image.asset("assets/images/Ai/aiLogo.jpg", height: 70),
                   const SizedBox(height: 10),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
