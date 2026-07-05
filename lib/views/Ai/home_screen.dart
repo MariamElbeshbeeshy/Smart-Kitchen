@@ -185,7 +185,7 @@ Return exactly this JSON format:
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      "assets/images/fridge.jpg",
+                      "assets/images/Ai/fridge.jpg",
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -515,7 +515,7 @@ Return exactly this JSON format:
                       height: 80,
                       child: ClipOval(
                         child: Image.asset(
-                          'assets/images/bag.jpg',
+                          'assets/images/Ai/bag.jpg',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -747,8 +747,8 @@ Return exactly this JSON format:
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 18, color: const Color(0xFF2E7D32)),
-          const SizedBox(width: 6),
+          Icon(icon, size: 16, color: const Color(0xFF2E7D32)),
+          const SizedBox(width: 4),
           Text(text),
         ],
       ),
