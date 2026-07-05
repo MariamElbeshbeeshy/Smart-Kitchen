@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:smart_kitchen/views/navigation_view.dart';
 
 import 'Login_veiw.dart';
 import 'package:smart_kitchen/widgets/customTextfield.dart';
@@ -68,7 +69,7 @@ class _SignUpViewState extends State<SignUpView> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Login(),
+          builder: (context) => NavigationView(),
         ),
       );
     } on FirebaseAuthException catch (e) {
