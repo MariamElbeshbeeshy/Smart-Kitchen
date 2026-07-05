@@ -108,7 +108,7 @@ class _AddItemViewState extends State<AddItemView> {
                 value: _quantity,
                 onChanged: (newValue) {
                   setState(() {
-                    _quantity = newValue; // تحديث القيمة محلياً عند الضغط
+                    _quantity = newValue;
                   });
                 },
               ),
@@ -119,7 +119,6 @@ class _AddItemViewState extends State<AddItemView> {
                 height: 55,
                 child: ElevatedButton(
                   onPressed: _submitData,
-                  style: ElevatedButton.styleFrom(),
                   child: const Text('Add to Pantry'),
                 ),
               ),
