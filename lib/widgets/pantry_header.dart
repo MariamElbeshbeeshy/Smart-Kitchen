@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_kitchen/helper/constants.dart';
 
 class PantryHeader extends StatelessWidget {
   final int itemCount;

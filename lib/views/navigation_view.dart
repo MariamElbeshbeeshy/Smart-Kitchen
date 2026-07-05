@@ -3,27 +3,35 @@ import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/views/auth/profile_veiw.dart';
 import 'package:smart_kitchen/views/pantry/pantry_view.dart';
 import 'package:smart_kitchen/views/marketplace/marketplace_view.dart';
+import 'package:smart_kitchen/views/cart/cart_view.dart';
 
 class NavigationView extends StatefulWidget {
-  const NavigationView({super.key});
+  NavigationView({Key? key}) : super(key: key ?? navigationKey);
+
+  static final GlobalKey<NavigationViewState> navigationKey =
+      GlobalKey<NavigationViewState>();
   static String id = "navigation view";
 
+  static void changeTab(int index) {
+    navigationKey.currentState?.setTab(index);
+  }
+
   @override
-  State<NavigationView> createState() => _NavigationViewState();
+  State<NavigationView> createState() => NavigationViewState();
 }
 
-class _NavigationViewState extends State<NavigationView> {
+class NavigationViewState extends State<NavigationView> {
   int _selectedIndex = 2;
 
   final List<Widget> _pages = [
     MarketplaceView(),
-    Center(child: Text("welcome in AI Cook")),
+    const CartView(),
     PantryInventoryScreen(),
-    Center(child: Text("welcome in Cart")),
+    Center(child: Text("welcome in AI Cook")),
     ProfileScreen(),
   ];
 
-  void _onNavItemTapped(int index) {
+  void setTab(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -50,7 +58,7 @@ class _NavigationViewState extends State<NavigationView> {
           borderRadius: BorderRadius.circular(40),
           child: BottomNavigationBar(
             currentIndex: _selectedIndex,
-            onTap: _onNavItemTapped,
+            onTap: setTab,
             selectedItemColor: kSecondaryColor, // اللون #097622
             unselectedItemColor: kInactiveColor,
             selectedLabelStyle: const TextStyle(
@@ -64,17 +72,18 @@ class _NavigationViewState extends State<NavigationView> {
                 label: "Marketplace",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.smart_toy_outlined),
-                label: "AI Cook",
+                icon: Icon(Icons.shopping_cart_outlined),
+                label: "Cart",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.inventory_2_outlined),
                 label: "Inventory",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart_outlined),
-                label: "Cart",
+                icon: Icon(Icons.smart_toy_outlined),
+                label: "AI Cook",
               ),
+              
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline),
                 label: "Profile",

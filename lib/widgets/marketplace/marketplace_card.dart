@@ -62,7 +62,7 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => const Center(
+                          errorBuilder: (context, error, stackTrace) => const Center(
                             child: Icon(
                               Icons.image_outlined,
                               size: 56,

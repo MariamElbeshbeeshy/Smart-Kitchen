@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/models/marketplace_product.dart';
+import 'package:smart_kitchen/cubits/cart_cubit/cart_cubit.dart';
+import 'package:smart_kitchen/helper/cart_notification_helper.dart';
+
+
 
 class ProductDetailsView extends StatefulWidget {
   final MarketplaceProduct product;
@@ -40,7 +45,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     child: Image.asset(
                       "assets/images/marketplace/${widget.product.imageName}",
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
+                      errorBuilder: (context, error, stackTrace) => Container(
                         color: const Color(0xffF6F3EE),
                         child: const Center(
                           child: Icon(Icons.image_outlined, size: 80, color: Colors.grey),
@@ -281,7 +286,10 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
                       Expanded(
                         child: GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/cart'),
+                          onTap: () {
+                            context.read<CartCubit>().addItem(widget.product, quantity: quantity);
+                            showCartNotification(context, widget.product.name);
+                          },
                           child: Container(
                             height: 56,
                             decoration: BoxDecoration(
