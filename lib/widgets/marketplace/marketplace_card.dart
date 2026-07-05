@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/models/marketplace_product.dart';
+import 'package:smart_kitchen/cubits/favorites_cubit.dart';
+import 'package:smart_kitchen/helper/cart_notification_helper.dart';
 
 class MarketplaceCard extends StatefulWidget {
   final MarketplaceProduct product;
@@ -19,8 +22,6 @@ class MarketplaceCard extends StatefulWidget {
 }
 
 class _MarketplaceCardState extends State<MarketplaceCard> {
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -79,7 +80,12 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
                     top: 10,
                     right: 10,
                     child: GestureDetector(
-                      onTap: () => setState(() => isFavorite = !isFavorite),
+                      onTap: () {
+                        final cubit = context.read<FavoritesCubit>();
+                        final isCurrentlyFavorite = cubit.isFavorite(widget.product.id);
+                        cubit.toggleFavorite(widget.product);
+                        showFavoriteNotification(context, widget.product.name, !isCurrentlyFavorite);
+                      },
                       child: Container(
                         width: 34,
                         height: 34,
@@ -94,10 +100,15 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
                             ),
                           ],
                         ),
-                        child: Icon(
-                          isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: Colors.redAccent,
-                          size: 17,
+                        child: BlocBuilder<FavoritesCubit, List<MarketplaceProduct>>(
+                          builder: (context, favorites) {
+                            final isFav = favorites.any((p) => p.id == widget.product.id);
+                            return Icon(
+                              isFav ? Icons.favorite : Icons.favorite_border,
+                              color: Colors.redAccent,
+                              size: 17,
+                            );
+                          },
                         ),
                       ),
                     ),

@@ -29,12 +29,26 @@ class _CheckoutViewState extends State<CheckoutView> {
           icon: const Icon(Icons.arrow_back, color: kSecondaryColor),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Kitchenly',
-          style: TextStyle(
-            color: kPrimaryColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
+        title: RichText(
+          text: const TextSpan(
+            children: [
+              TextSpan(
+                text: "Kitchen",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF0F6B4E),
+                ),
+              ),
+              TextSpan(
+                text: "ly",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF4CAF50),
+                ),
+              ),
+            ],
           ),
         ),
         actions: const [
@@ -776,12 +790,12 @@ class _CheckoutViewState extends State<CheckoutView> {
                       // Clear the cart
                       context.read<CartCubit>().loadCartItems();
                       
-                      // Go back to the main navigation screen (home tab/marketplace view)
+                      // Go back to the main navigation screen (inventory tab)
                       Navigator.pop(context); // pops CheckoutView
-                      NavigationView.changeTab(2); // switches to Home tab in NavigationView
+                      NavigationView.changeTab(2); // switches to Inventory tab in NavigationView
                     },
                     child: const Text(
-                      "Back to Home",
+                      "Back to Inventory",
                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ),

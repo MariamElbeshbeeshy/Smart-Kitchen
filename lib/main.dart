@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'views/auth/onboarding_view.dart';
 import 'package:smart_kitchen/cubits/pantry_cubit/pantry_cubit.dart';
 import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/models/pantry_item_model.dart';
@@ -15,6 +14,7 @@ import 'package:smart_kitchen/cubits/marketplace_cubit/marketplace_cubit.dart';
 import 'package:smart_kitchen/cubits/cart_cubit/cart_cubit.dart';
 import 'package:smart_kitchen/views/cart/cart_view.dart';
 import 'package:smart_kitchen/views/cart/checkout_view.dart';
+import 'package:smart_kitchen/cubits/favorites_cubit.dart';
 
 
 
@@ -33,6 +33,7 @@ void main() async {
         BlocProvider(create: (context) => PantryCubit()..loadPantryItems()),
         BlocProvider(create: (context) => MarketplaceCubit()),
         BlocProvider(create: (context) => CartCubit()..loadCartItems()),
+        BlocProvider(create: (context) => FavoritesCubit()),
       ],
       child: const MainApp(),
     ),

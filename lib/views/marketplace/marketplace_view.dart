@@ -10,6 +10,7 @@ import 'package:smart_kitchen/widgets/marketplace/marketplace_grid.dart';
 import 'package:smart_kitchen/views/marketplace/product_details_view.dart';
 import 'package:smart_kitchen/cubits/cart_cubit/cart_cubit.dart';
 import 'package:smart_kitchen/helper/cart_notification_helper.dart';
+import 'package:smart_kitchen/views/navigation_view.dart';
 import 'package:smart_kitchen/views/marketplace/add_product_view.dart';
 
 class MarketplaceView extends StatefulWidget {
@@ -119,7 +120,13 @@ class _MarketplaceViewState extends State<MarketplaceView> {
                             },
                             onAddToCart: (product) {
                               context.read<CartCubit>().addItem(product);
-                              showCartNotification(context, product.name);
+                              showCartNotification(
+                                context, 
+                                product.name,
+                                onViewPressed: () {
+                                  NavigationView.changeTab(1);
+                                },
+                              );
                             },
                           ),
                         ],
