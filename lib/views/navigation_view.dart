@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smart_kitchen/helper/constants.dart';
+import 'package:smart_kitchen/views/Ai/home_screen.dart';
 import 'package:smart_kitchen/views/auth/profile_veiw.dart';
 import 'package:smart_kitchen/views/pantry/pantry_view.dart';
 import 'package:smart_kitchen/views/marketplace/marketplace_view.dart';
 import 'package:smart_kitchen/views/cart/cart_view.dart';
+
 
 class NavigationView extends StatefulWidget {
   NavigationView({Key? key}) : super(key: key ?? navigationKey);
@@ -27,7 +29,7 @@ class NavigationViewState extends State<NavigationView> {
     MarketplaceView(),
     const CartView(),
     PantryInventoryScreen(),
-    Center(child: Text("welcome in AI Cook")),
+    HomeScreen(),
     ProfileScreen(),
   ];
 
