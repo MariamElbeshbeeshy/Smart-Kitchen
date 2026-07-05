@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_kitchen/helper/constants.dart';
+import 'package:smart_kitchen/views/auth/profile_veiw.dart';
 import 'package:smart_kitchen/views/pantry/pantry_view.dart';
 import 'package:smart_kitchen/views/marketplace/marketplace_view.dart';
 import 'package:smart_kitchen/views/cart/cart_view.dart';
@@ -23,11 +24,11 @@ class NavigationViewState extends State<NavigationView> {
   int _selectedIndex = 2;
 
   final List<Widget> _pages = [
-    PantryInventoryScreen(),
-    Center(child: Text("welcome in AI Cook")),
     MarketplaceView(),
     const CartView(),
-    Center(child: Text("welcome in Profile")),
+    PantryInventoryScreen(),
+    Center(child: Text("welcome in AI Cook")),
+    ProfileScreen(),
   ];
 
   void setTab(int index) {
@@ -40,7 +41,6 @@ class NavigationViewState extends State<NavigationView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
-
       bottomNavigationBar: Container(
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 11),
         decoration: BoxDecoration(
@@ -68,23 +68,22 @@ class NavigationViewState extends State<NavigationView> {
             unselectedLabelStyle: const TextStyle(fontSize: 12),
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.inventory_2_outlined),
-                label: "Inventory",
+                icon: Icon(Icons.store),
+                label: "Marketplace",
               ),
-
-              BottomNavigationBarItem(
-                icon: Icon(Icons.smart_toy_outlined),
-                label: "AI Cook",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_filled),
-                label: "Home",
-              ),
-
               BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart_outlined),
                 label: "Cart",
               ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.inventory_2_outlined),
+                label: "Inventory",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.smart_toy_outlined),
+                label: "AI Cook",
+              ),
+              
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline),
                 label: "Profile",

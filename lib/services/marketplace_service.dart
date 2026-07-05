@@ -105,7 +105,7 @@ class MarketplaceService {
         "price": 4.29,
         "rating": 4.8,
         "category": "Fruits",
-        "imageName": "Organic Strawberries.png",
+        "imageName": "Strawberries.jfif",
         "description": "Certified organic strawberries grown without pesticides. Sweet, juicy, and perfect for desserts or smoothies.",
         "market": "Fresh Market",
         "unit": "Box",

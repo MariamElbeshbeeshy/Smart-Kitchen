@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'views/auth/onboarding_view.dart';
 import 'package:smart_kitchen/cubits/pantry_cubit/pantry_cubit.dart';
 import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/models/pantry_item_model.dart';
@@ -65,6 +66,7 @@ class MainApp extends StatelessWidget {
         '/checkout': (context) => const CheckoutView(),
       },
       initialRoute: NavigationView.id,
+      // home: OnboardingScreen(),
     );
   }
 }

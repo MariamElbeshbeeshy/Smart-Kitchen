@@ -12,7 +12,12 @@
           "package_name": "com.example.smart_kitchen"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "456910880549-eoa3nfciv268d3qnmhkftu5tfucsiq9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDpMg_9WzYsA3vXre-Xa5XtaElAr20NSXs"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456910880549-eoa3nfciv268d3qnmhkftu5tfucsiq9h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
