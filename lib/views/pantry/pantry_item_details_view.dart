@@ -47,7 +47,7 @@ class _PantryItemDetailsViewState extends State<PantryItemDetailsView> {
                     child: Image.asset(
                       widget.product.productImage,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
+                      errorBuilder: (context, error, stackTrace) => Container(
                         color: const Color(0xffF6F3EE),
                         child: const Center(
                           child: Icon(

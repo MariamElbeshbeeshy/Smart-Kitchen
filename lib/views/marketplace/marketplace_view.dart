@@ -7,6 +7,11 @@ import 'package:smart_kitchen/widgets/marketplace/marketplace_search_bar.dart';
 import 'package:smart_kitchen/widgets/marketplace/marketplace_filters.dart';
 import 'package:smart_kitchen/widgets/marketplace/marketplace_grid.dart';
 import 'package:smart_kitchen/views/marketplace/product_details_view.dart';
+import 'package:smart_kitchen/cubits/cart_cubit/cart_cubit.dart';
+import 'package:smart_kitchen/helper/cart_notification_helper.dart';
+
+
+
 
 class MarketplaceView extends StatefulWidget {
   const MarketplaceView({super.key});
@@ -102,7 +107,8 @@ class _MarketplaceViewState extends State<MarketplaceView> {
                               );
                             },
                             onAddToCart: (product) {
-                              Navigator.pushNamed(context, '/cart');
+                              context.read<CartCubit>().addItem(product);
+                              showCartNotification(context, product.name);
                             },
                           ),
                         ],

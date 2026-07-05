@@ -2,27 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/views/pantry/pantry_view.dart';
 import 'package:smart_kitchen/views/marketplace/marketplace_view.dart';
+import 'package:smart_kitchen/views/cart/cart_view.dart';
 
 class NavigationView extends StatefulWidget {
-  const NavigationView({super.key});
+  NavigationView({Key? key}) : super(key: key ?? navigationKey);
+
+  static final GlobalKey<NavigationViewState> navigationKey =
+      GlobalKey<NavigationViewState>();
   static String id = "navigation view";
 
+  static void changeTab(int index) {
+    navigationKey.currentState?.setTab(index);
+  }
+
   @override
-  State<NavigationView> createState() => _NavigationViewState();
+  State<NavigationView> createState() => NavigationViewState();
 }
 
-class _NavigationViewState extends State<NavigationView> {
+class NavigationViewState extends State<NavigationView> {
   int _selectedIndex = 2;
 
   final List<Widget> _pages = [
     PantryInventoryScreen(),
     Center(child: Text("welcome in AI Cook")),
     MarketplaceView(),
-    Center(child: Text("welcome in Cart")),
+    const CartView(),
     Center(child: Text("welcome in Profile")),
   ];
 
-  void _onNavItemTapped(int index) {
+  void setTab(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -50,7 +58,7 @@ class _NavigationViewState extends State<NavigationView> {
           borderRadius: BorderRadius.circular(40),
           child: BottomNavigationBar(
             currentIndex: _selectedIndex,
-            onTap: _onNavItemTapped,
+            onTap: setTab,
             selectedItemColor: kSecondaryColor, // اللون #097622
             unselectedItemColor: kInactiveColor,
             selectedLabelStyle: const TextStyle(
