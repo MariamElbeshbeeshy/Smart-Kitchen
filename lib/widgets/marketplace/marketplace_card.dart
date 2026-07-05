@@ -120,7 +120,7 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 17,
+                        fontSize: 15,
                         height: 1.2,
                         color: Color(0xff1A1A1A),
                       ),
@@ -157,7 +157,7 @@ class _MarketplaceCardState extends State<MarketplaceCard> {
                             "\$${widget.product.price}",
                             style: const TextStyle(
                               fontWeight: FontWeight.w800,
-                              fontSize: 20,
+                              fontSize: 19,
                               color: Color(0xff2E7D32),
                             ),
                           ),
