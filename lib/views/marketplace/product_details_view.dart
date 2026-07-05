@@ -4,6 +4,8 @@ import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/models/marketplace_product.dart';
 import 'package:smart_kitchen/cubits/cart_cubit/cart_cubit.dart';
 import 'package:smart_kitchen/helper/cart_notification_helper.dart';
+import 'package:smart_kitchen/cubits/favorites_cubit.dart';
+import 'package:smart_kitchen/views/navigation_view.dart';
 
 
 
@@ -18,7 +20,6 @@ class ProductDetailsView extends StatefulWidget {
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
   int quantity = 1;
-  bool isFavorite = false;
   bool isExpanded = false;
 
   @override
@@ -73,12 +74,16 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                   ),
                 ),
 
-                // Favourite
                 Positioned(
                   top: 50,
                   right: 16,
                   child: GestureDetector(
-                    onTap: () => setState(() => isFavorite = !isFavorite),
+                    onTap: () {
+                      final cubit = context.read<FavoritesCubit>();
+                      final isCurrentlyFavorite = cubit.isFavorite(widget.product.id);
+                      cubit.toggleFavorite(widget.product);
+                      showFavoriteNotification(context, widget.product.name, !isCurrentlyFavorite);
+                    },
                     child: Container(
                       width: 42, height: 42,
                       decoration: BoxDecoration(
@@ -86,9 +91,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         borderRadius: BorderRadius.circular(14),
                         boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: .08), blurRadius: 8)],
                       ),
-                      child: Icon(
-                        isFavorite ? Icons.favorite : Icons.favorite_border,
-                        size: 18, color: Colors.redAccent,
+                      child: BlocBuilder<FavoritesCubit, List<MarketplaceProduct>>(
+                        builder: (context, favorites) {
+                          final isFav = favorites.any((p) => p.id == widget.product.id);
+                          return Icon(
+                            isFav ? Icons.favorite : Icons.favorite_border,
+                            size: 18, color: Colors.redAccent,
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -288,7 +298,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         child: GestureDetector(
                           onTap: () {
                             context.read<CartCubit>().addItem(widget.product, quantity: quantity);
-                            showCartNotification(context, widget.product.name);
+                            showCartNotification(
+                              context, 
+                              widget.product.name,
+                              onViewPressed: () {
+                                Navigator.pop(context);
+                                NavigationView.changeTab(1);
+                              },
+                            );
                           },
                           child: Container(
                             height: 56,

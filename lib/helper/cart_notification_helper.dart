@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:smart_kitchen/helper/constants.dart';
-import 'package:smart_kitchen/views/navigation_view.dart';
+import 'package:smart_kitchen/views/profile/wishlist_view.dart';
 
 OverlayEntry? _currentOverlayEntry;
 
-void showCartNotification(BuildContext context, String productName) {
+void showCartNotification(BuildContext context, String productName, {required VoidCallback onViewPressed}) {
   // Remove existing overlay first to reset the display
   _currentOverlayEntry?.remove();
   _currentOverlayEntry = null;
@@ -15,13 +15,40 @@ void showCartNotification(BuildContext context, String productName) {
   late OverlayEntry entry;
   entry = OverlayEntry(
     builder: (context) => CartNotificationOverlay(
-      productName: productName,
-      onViewPressed: () {
-        if (Navigator.canPop(context)) {
-          Navigator.pop(context);
+      message: "$productName added to your cart",
+      icon: Icons.check_circle,
+      onViewPressed: onViewPressed,
+      onDismiss: () {
+        if (_currentOverlayEntry == entry) {
+          entry.remove();
+          _currentOverlayEntry = null;
         }
-        NavigationView.changeTab(3);
       },
+    ),
+  );
+
+  _currentOverlayEntry = entry;
+  overlayState.insert(entry);
+}
+
+void showFavoriteNotification(BuildContext context, String productName, bool isAdded) {
+  // Remove existing overlay first to reset the display
+  _currentOverlayEntry?.remove();
+  _currentOverlayEntry = null;
+
+  final overlayState = Overlay.of(context);
+  
+  late OverlayEntry entry;
+  entry = OverlayEntry(
+    builder: (context) => CartNotificationOverlay(
+      message: isAdded ? "$productName added to WishList" : "$productName removed from WishList",
+      icon: isAdded ? Icons.favorite : Icons.favorite_border,
+      onViewPressed: isAdded ? () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const WishListView()),
+        );
+      } : null,
       onDismiss: () {
         if (_currentOverlayEntry == entry) {
           entry.remove();
@@ -36,14 +63,16 @@ void showCartNotification(BuildContext context, String productName) {
 }
 
 class CartNotificationOverlay extends StatefulWidget {
-  final String productName;
-  final VoidCallback onViewPressed;
+  final String message;
+  final IconData icon;
+  final VoidCallback? onViewPressed;
   final VoidCallback onDismiss;
 
   const CartNotificationOverlay({
     super.key,
-    required this.productName,
-    required this.onViewPressed,
+    required this.message,
+    required this.icon,
+    this.onViewPressed,
     required this.onDismiss,
   });
 
@@ -73,8 +102,8 @@ class _CartNotificationOverlayState extends State<CartNotificationOverlay> with 
 
     _controller.forward();
 
-    // Auto dismiss strictly after 5 seconds
-    _dismissTimer = Timer(const Duration(seconds: 5), () {
+    // Auto dismiss strictly after 3 seconds (as requested)
+    _dismissTimer = Timer(const Duration(seconds: 3), () {
       if (mounted) {
         _dismiss();
       }
@@ -122,11 +151,11 @@ class _CartNotificationOverlayState extends State<CartNotificationOverlay> with 
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.check_circle, color: Colors.white, size: 24),
+                    Icon(widget.icon, color: Colors.white, size: 24),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        "${widget.productName} added to your cart",
+                        widget.message,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -134,28 +163,30 @@ class _CartNotificationOverlayState extends State<CartNotificationOverlay> with 
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                        backgroundColor: Colors.white.withValues(alpha: 0.2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    if (widget.onViewPressed != null) ...[
+                      const SizedBox(width: 8),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                          backgroundColor: Colors.white.withValues(alpha: 0.2),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          widget.onViewPressed!();
+                          _dismiss();
+                        },
+                        child: const Text(
+                          "View",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
                         ),
                       ),
-                      onPressed: () {
-                        widget.onViewPressed();
-                        _dismiss();
-                      },
-                      child: const Text(
-                        "View",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ),
+                    ],
                   ],
                 ),
               ),

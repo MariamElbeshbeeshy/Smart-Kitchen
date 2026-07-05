@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'Login_veiw.dart'; // Make sure the filename spelling matches exactly
+import 'Login_veiw.dart';
+import 'package:smart_kitchen/views/profile/wishlist_view.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -140,8 +141,13 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     _ProfileTile(
                       icon: Icons.favorite_border,
-                      title: "Favorite Recipes",
-                      onTap: () {},
+                      title: "WishList",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const WishListView()),
+                        );
+                      },
                     ),
                     _ProfileTile(
                       icon: Icons.notifications_none,
