@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     authDomain: 'smart-kitchen-4ab79.firebaseapp.com',
     storageBucket: 'smart-kitchen-4ab79.firebasestorage.app',
   );
+
 }
