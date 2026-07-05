@@ -10,12 +10,26 @@ class PantryAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: const Text(
-        'Kitchenly',
-        style: TextStyle(
-          color: kPrimaryColor,
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
+      title: RichText(
+        text: const TextSpan(
+          children: [
+            TextSpan(
+              text: "Kitchen",
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF0F6B4E),
+              ),
+            ),
+            TextSpan(
+              text: "ly",
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF4CAF50),
+              ),
+            ),
+          ],
         ),
       ),
       actions: const [
