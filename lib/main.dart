@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'views/auth/onboarding_view.dart';
 import 'package:smart_kitchen/cubits/pantry_cubit/pantry_cubit.dart';
@@ -16,13 +17,17 @@ import 'package:smart_kitchen/views/cart/cart_view.dart';
 import 'package:smart_kitchen/views/cart/checkout_view.dart';
 
 
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
   Hive.registerAdapter(PantryItemModelAdapter());
   await Hive.openBox<PantryItemModel>('pantry_box');
+  await dotenv.load(fileName: ".env");
   runApp(
+    
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => PantryCubit()..loadPantryItems()),
