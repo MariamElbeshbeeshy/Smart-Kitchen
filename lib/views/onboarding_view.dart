@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_kitchen/models/onboarding_data_model.dart';
 import 'package:smart_kitchen/views/Sign_up_view.dart';
 import 'package:smart_kitchen/widgets/onboarding_widget.dart';
@@ -16,19 +17,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<OnboardingDataModel> data = [
     OnboardingDataModel(
-  desc: "Don’t let your ingredients go to waste. Tell us what’s in your pantry, and our AI will suggest the perfect recipe for you.",
-  image:  "assets/images/HealthyIngredients.png", 
-   title: "Cook with what you have"),
+      desc:
+          "Don’t let your ingredients go to waste. Tell us what’s in your pantry, and our AI will suggest the perfect recipe for you.",
+      image: "assets/images/HealthyIngredients.png",
+      title: "Cook with what you have",
+    ),
     OnboardingDataModel(
-    desc:  "Join a community of neighbors buying and selling surplus home-cooked meals or extra groceries at great prices.",
-     image: "assets/images/Frame.png", 
-   title: "Share more, waste less",
-   ),
-       OnboardingDataModel(
-    desc: "Track your groceries effortlessly. We’ll send you smart alerts before your food expires, so you never have to throw away money again.",
-   image:  "assets/images/HeroIllustration.png",
-   title:  "Your fridge on autopilot",),
-
+      desc:
+          "Join a community of neighbors buying and selling surplus home-cooked meals or extra groceries at great prices.",
+      image: "assets/images/Frame.png",
+      title: "Share more, waste less",
+    ),
+    OnboardingDataModel(
+      desc:
+          "Track your groceries effortlessly. We’ll send you smart alerts before your food expires, so you never have to throw away money again.",
+      image: "assets/images/HeroIllustration.png",
+      title: "Your fridge on autopilot",
+    ),
   ];
 
   @override
@@ -44,6 +49,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  Future<void> saveOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("seenOnboarding", true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,51 +61,48 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title:            RichText(
-                    text: const TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Kitchen",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF105E22),
-                          ),
-                        ),
-                        TextSpan(
-                          text: "ly",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
+        title: RichText(
+          text: const TextSpan(
+            children: [
+              TextSpan(
+                text: "Kitchen",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF105E22),
+                ),
+              ),
+              TextSpan(
+                text: "ly",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
+        ),
         actions: [
-          if(currentIndex != data.length - 1)
-          TextButton(
-            onPressed: () {
-              controller.jumpToPage(data.length - 1);
-            },
-            child: const Text(
-              "Skip",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
+          if (currentIndex != data.length - 1)
+            TextButton(
+              onPressed: () {
+                controller.jumpToPage(data.length - 1);
+              },
+              child: const Text(
+                "Skip",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
               ),
             ),
-          ),
         ],
-
       ),
       body: SafeArea(
         child: Column(
           children: [
-            /// 📱 Pages
             Expanded(
               child: PageView.builder(
                 controller: controller,
@@ -106,17 +113,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 },
                 itemCount: data.length,
                 itemBuilder: (context, index) {
-                  return OnboardingWidget(onboardingInfo: data[index]);
+                  return OnboardingWidget(
+                    onboardingInfo: data[index],
+                  );
                 },
               ),
             ),
 
-            /// 🔽 Bottom
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  /// 🔵 Dots
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -139,7 +146,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
                   const SizedBox(height: 20),
 
-                  /// 🟢 Button
                   currentIndex == data.length - 1
                       ? Center(
                           child: SizedBox(
@@ -152,16 +158,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                          context,
-                                      MaterialPageRoute(
-                                 builder: (context) => SignUpView(),
-                                          ),
-                                            );
+                              onPressed: () async {
+                                await saveOnboarding();
+
+                                if (!mounted) return;
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SignUpView(),
+                                  ),
+                                );
                               },
                               child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     "Get Started",
@@ -177,7 +189,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   ),
                                 ],
                               ),
-                              
                             ),
                           ),
                         )
@@ -190,15 +201,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               style: ElevatedButton.styleFrom(
                                 shape: const CircleBorder(),
                                 backgroundColor: Colors.green,
-                                padding: EdgeInsets.zero, 
+                                padding: EdgeInsets.zero,
                               ),
                               onPressed: nextPage,
-                              child: const Center(
-                              
-                                child: Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.white,
-                                ),
+                              child: const Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
                               ),
                             ),
                           ),
