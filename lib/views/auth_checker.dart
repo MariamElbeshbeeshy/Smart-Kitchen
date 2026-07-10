@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'Login_veiw.dart';
-import 'onboarding_view.dart';
-import 'profile_veiw.dart';
+import 'package:smart_kitchen/views/auth/Login_veiw.dart';
+import 'package:smart_kitchen/views/auth/onboarding_view.dart';
+import 'package:smart_kitchen/views/navigation_view.dart';
 
 class AuthChecker extends StatefulWidget {
   const AuthChecker({super.key});
@@ -52,7 +51,7 @@ class _AuthCheckerState extends State<AuthChecker> {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      return const ProfileScreen();
+      return NavigationView();
     }
 
     return const Login();
