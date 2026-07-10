@@ -15,9 +15,7 @@ import 'package:smart_kitchen/cubits/cart_cubit/cart_cubit.dart';
 import 'package:smart_kitchen/views/cart/cart_view.dart';
 import 'package:smart_kitchen/views/cart/checkout_view.dart';
 import 'package:smart_kitchen/cubits/favorites_cubit.dart';
-
-
-
+import 'views/auth_checker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +70,7 @@ class MainApp extends StatelessWidget {
         '/checkout': (context) => const CheckoutView(),
       },
       initialRoute: NavigationView.id,
-      // home: OnboardingScreen(),
+      home: AuthChecker(),
     );
   }
 }

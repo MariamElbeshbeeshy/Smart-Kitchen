@@ -42,8 +42,7 @@ class _SignUpViewState extends State<SignUpView> {
       return;
     }
 
-    if (passwordController.text.trim() !=
-        confirmController.text.trim()) {
+    if (passwordController.text.trim() != confirmController.text.trim()) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Passwords do not match"),
@@ -110,8 +109,7 @@ class _SignUpViewState extends State<SignUpView> {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
 
-      final GoogleSignInAccount? googleUser =
-          await googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser == null) return null;
 
@@ -141,13 +139,11 @@ class _SignUpViewState extends State<SignUpView> {
           child: Column(
             children: [
               const SizedBox(height: 50),
-
               Image.asset(
                 "assets/images/logo.png",
                 height: 103,
                 width: 107,
               ),
-
               RichText(
                 text: const TextSpan(
                   children: [
@@ -170,9 +166,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ],
                 ),
               ),
-
               const SizedBox(height: 20),
-
               const Text(
                 "Create An Account!",
                 style: TextStyle(
@@ -180,8 +174,8 @@ class _SignUpViewState extends State<SignUpView> {
                   color: Color(0xFF4CAF50),
                   fontWeight: FontWeight.w500,
                 ),
-              ),              const SizedBox(height: 25),
-
+              ),
+              const SizedBox(height: 25),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomTextFormFeild(
@@ -197,9 +191,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomTextFormFeild(
@@ -219,9 +211,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: CustomTextFormFeild(
@@ -241,9 +231,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 25),
-
               SizedBox(
                 width: 325,
                 height: 58,
@@ -261,9 +249,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -287,9 +273,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ],
                 ),
               ),
-
               const SizedBox(height: 20),
-
               SizedBox(
                 width: 325,
                 height: 58,
@@ -313,7 +297,7 @@ class _SignUpViewState extends State<SignUpView> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Login(),
+                          builder: (context) => NavigationView(),
                         ),
                       );
                     } catch (e) {
@@ -352,8 +336,8 @@ class _SignUpViewState extends State<SignUpView> {
                     ],
                   ),
                 ),
-              ),              const SizedBox(height: 10),
-
+              ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
