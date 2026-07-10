@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Login_veiw.dart';
-import 'onboarding_view.dart';
-import 'profile_veiw.dart';
+import 'auth/Login_veiw.dart';
+import 'auth/onboarding_view.dart';
+import 'auth/profile_veiw.dart';
+
+
 
 class AuthChecker extends StatefulWidget {
   const AuthChecker({super.key});

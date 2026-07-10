@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_kitchen/models/onboarding_data_model.dart';
-import 'package:smart_kitchen/views/Sign_up_view.dart';
+import 'package:smart_kitchen/views/auth/Sign_up_view.dart';
 import 'package:smart_kitchen/widgets/onboarding_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'firebase_options.dart';
 import 'views/auth_checker.dart';
+
+import 'package:smart_kitchen/cubits/pantry_cubit/pantry_cubit.dart';
+import 'package:smart_kitchen/cubits/marketplace_cubit/marketplace_cubit.dart';
+import 'package:smart_kitchen/models/pantry_item_model.dart';
+import 'package:smart_kitchen/helper/constants.dart';
+import 'package:smart_kitchen/views/navigation_view.dart';
+import 'package:smart_kitchen/views/pantry/add_item_view.dart';
+import 'package:smart_kitchen/views/pantry/pantry_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,7 +21,19 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MainApp());
+  await Hive.initFlutter();
+  Hive.registerAdapter(PantryItemModelAdapter());
+  await Hive.openBox<PantryItemModel>('pantry_box');
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => PantryCubit()..loadPantryItems()),
+        BlocProvider(create: (_) => MarketplaceCubit()),
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -18,9 +41,31 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthChecker(),
+      theme: ThemeData(
+        primaryColor: kPrimaryColor,
+        scaffoldBackgroundColor: kBackgroundColor,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kPrimaryColor,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
+            textStyle: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+      routes: {
+        NavigationView.id: (context) => NavigationView(),
+        PantryInventoryScreen.id: (context) => PantryInventoryScreen(),
+        AddItemView.id: (context) => AddItemView(),
+      },
+      home: const AuthChecker(),
     );
   }
 }

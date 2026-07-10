@@ -17,15 +17,24 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
@@ -40,50 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBcpP9xI5edJujQ_zfMEnTLQn11a92yIws',
-    appId: '1:719601960728:web:05678b8b4930d5e19c406d',
-    messagingSenderId: '719601960728',
-    projectId: 'smart-kitchen-8c465',
-    authDomain: 'smart-kitchen-8c465.firebaseapp.com',
-    storageBucket: 'smart-kitchen-8c465.firebasestorage.app',
-    measurementId: 'G-MFV6JD3YCP',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDPEfWuL3wVMH_TrsEJvAtgP8-qIgwTjzg',
-    appId: '1:719601960728:android:11ffda1ec2b9fed69c406d',
-    messagingSenderId: '719601960728',
-    projectId: 'smart-kitchen-8c465',
-    storageBucket: 'smart-kitchen-8c465.firebasestorage.app',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBhWmiCMgzpMXPL_BqhZyDk0FPHzvtTI5k',
-    appId: '1:719601960728:ios:6f2d06212a87bd649c406d',
-    messagingSenderId: '719601960728',
-    projectId: 'smart-kitchen-8c465',
-    storageBucket: 'smart-kitchen-8c465.firebasestorage.app',
-    iosBundleId: 'com.example.smartKitchen',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBhWmiCMgzpMXPL_BqhZyDk0FPHzvtTI5k',
-    appId: '1:719601960728:ios:6f2d06212a87bd649c406d',
-    messagingSenderId: '719601960728',
-    projectId: 'smart-kitchen-8c465',
-    storageBucket: 'smart-kitchen-8c465.firebasestorage.app',
-    iosBundleId: 'com.example.smartKitchen',
+    apiKey: 'AIzaSyDpMg_9WzYsA3vXre-Xa5XtaElAr20NSXs',
+    appId: '1:456910880549:android:42a1f692edd16802eaa4cc',
+    messagingSenderId: '456910880549',
+    projectId: 'smart-kitchen-4ab79',
+    storageBucket: 'smart-kitchen-4ab79.firebasestorage.app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBcpP9xI5edJujQ_zfMEnTLQn11a92yIws',
-    appId: '1:719601960728:web:c1a5a206d2d672809c406d',
-    messagingSenderId: '719601960728',
-    projectId: 'smart-kitchen-8c465',
-    authDomain: 'smart-kitchen-8c465.firebaseapp.com',
-    storageBucket: 'smart-kitchen-8c465.firebasestorage.app',
-    measurementId: 'G-9KSE7TSBN7',
+    apiKey: 'AIzaSyAtgupJLPajiN8IoO0LYLPfGgcFJnkqRjs',
+    appId: '1:456910880549:web:33d6f0737a060fb8eaa4cc',
+    messagingSenderId: '456910880549',
+    projectId: 'smart-kitchen-4ab79',
+    authDomain: 'smart-kitchen-4ab79.firebaseapp.com',
+    storageBucket: 'smart-kitchen-4ab79.firebasestorage.app',
   );
 
 }

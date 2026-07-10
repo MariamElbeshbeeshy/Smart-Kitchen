@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'profile_veiw.dart';
+import 'package:smart_kitchen/views/navigation_view.dart';
 import 'Login_veiw.dart';
 import 'package:smart_kitchen/widgets/customTextfield.dart';
 
@@ -65,12 +65,12 @@ class _SignUpViewState extends State<SignUpView> {
         ),
       );
 
-    Navigator.pushReplacement(
-  context,
-  MaterialPageRoute(
-    builder: (context) => const ProfileScreen(),
-  ),
-);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const NavigationView(),
+        ),
+      );
     } on FirebaseAuthException catch (e) {
       String message;
 
@@ -107,10 +107,11 @@ class _SignUpViewState extends State<SignUpView> {
 
   Future<UserCredential?> signUpWithGoogle() async {
     try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final googleSignIn = GoogleSignIn.instance;
+      await googleSignIn.initialize();
 
       final GoogleSignInAccount? googleUser =
-          await googleSignIn.signIn();
+          await googleSignIn.authenticate();
 
       if (googleUser == null) return null;
 
@@ -118,7 +119,6 @@ class _SignUpViewState extends State<SignUpView> {
           await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
@@ -309,12 +309,12 @@ class _SignUpViewState extends State<SignUpView> {
                         ),
                       );
 
-                    Navigator.pushReplacement(
-  context,
-  MaterialPageRoute(
-    builder: (context) => const ProfileScreen(),
-  ),
-);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NavigationView(),
+                        ),
+                      );
                     } catch (e) {
                       if (!mounted) return;
 
