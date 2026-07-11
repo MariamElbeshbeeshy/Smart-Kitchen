@@ -69,7 +69,6 @@ class MainApp extends StatelessWidget {
         '/cart': (context) => const CartView(),
         '/checkout': (context) => const CheckoutView(),
       },
-      initialRoute: NavigationView.id,
       home: AuthChecker(),
     );
   }
