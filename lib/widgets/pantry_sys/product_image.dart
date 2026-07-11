@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smart_kitchen/models/pantry_item_model.dart';
-import 'package:smart_kitchen/views/pantry/pantry_item_details_view.dart';
 
 class ProductImage extends StatelessWidget {
   const ProductImage({

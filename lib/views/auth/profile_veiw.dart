@@ -222,39 +222,7 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class _CounterWidget extends StatelessWidget {
-  final String number;
-  final String title;
 
-  const _CounterWidget({
-    required this.number,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          number,
-          style: const TextStyle(
-            color: Color(0xff4CAF50),
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          title,
-          style: const TextStyle(
-            color: Colors.grey,
-            fontSize: 15,
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class _ProfileTile extends StatelessWidget {
   final IconData icon;

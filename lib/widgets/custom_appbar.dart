@@ -18,7 +18,7 @@ class PantryAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF0F6B4E),
+                color: kSecondaryColor,
               ),
             ),
             TextSpan(
@@ -26,7 +26,7 @@ class PantryAppBar extends StatelessWidget implements PreferredSizeWidget {
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF4CAF50),
+                color: kPrimaryColor,
               ),
             ),
           ],

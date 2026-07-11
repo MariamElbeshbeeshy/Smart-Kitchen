@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_kitchen/cubits/pantry_cubit/pantry_cubit.dart';
-import 'package:smart_kitchen/helper/constants.dart';
 import 'package:smart_kitchen/models/pantry_item_model.dart';
 import 'package:smart_kitchen/widgets/pantry_sys/product_image.dart';
 import 'package:smart_kitchen/widgets/pantry_sys/product_info.dart';
